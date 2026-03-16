@@ -1,8 +1,11 @@
 export type {
   Result,
   ResultArray,
+  FibonacciSequence,
   SearchArray,
   SearchTarget,
-} from './common'
+} from './types'
 
-export type { FibonacciSequence } from '../algorithms'
+export type {
+  LinearSearchOptions,
+} from './interfaces'

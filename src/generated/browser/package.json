@@ -1,0 +1,20 @@
+{
+  "name": "algorithms",
+  "type": "module",
+  "collaborators": [
+    "daveKontro <dkontro@hotmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "algorithms_bg.wasm",
+    "algorithms.js",
+    "algorithms_bg.js",
+    "algorithms.d.ts"
+  ],
+  "main": "algorithms.js",
+  "types": "algorithms.d.ts",
+  "sideEffects": [
+    "./algorithms.js",
+    "./snippets/*"
+  ]
+}

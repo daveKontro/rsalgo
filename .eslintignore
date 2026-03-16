@@ -5,5 +5,7 @@ node_modules
 specs
 dist
 notes
+scripts
+artifacts
 tsconfig.json
 tsdown.config.ts

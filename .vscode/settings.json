@@ -19,5 +19,8 @@
     "titleBar.inactiveBackground": "#05071c99",
     "titleBar.inactiveForeground": "#e7e7e799"
   },
-  "peacock.color": "#05071c"
+  "peacock.color": "#05071c",
+  "cSpell.words": [
+    "rsalgo"
+  ]
 }

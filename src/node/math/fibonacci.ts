@@ -1,9 +1,11 @@
 import {
   fibonacci_nth as fibonacci_nth_rs,
   fibonacci as fibonacci_rs,
-} from '../../generated/algorithms.js'
-import type { FibonacciSequence } from './types'
-import type { Result } from '../../types/common'
+} from '../../generated/node/algorithms.js'
+import type {
+  Result,
+  FibonacciSequence,
+} from '../../types/types.js'
 
 export const fibonacciNth = (n: number): Result => {
   return fibonacci_nth_rs(n)

@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { sum } from '../src/algorithms/math/sum'
+import { sum } from '../src/node/math/sum'
 
 describe('sum', () => {
   it('returns correct sum', () => {

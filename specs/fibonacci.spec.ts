@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import {
   fibonacciNth,
   fibonacci,
-} from '../src/algorithms/math/fibonacci'
+} from '../src/node/math/fibonacci'
 
 describe('fibonacciNth', () => {
   it('nth number is correct', () => {

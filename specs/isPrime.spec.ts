@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { isPrime } from '../src/algorithms/math/isPrime'
+import { isPrime } from '../src/node/math/isPrime'
 
 describe('isPrime', () => {
   it('primes are detected', () => {

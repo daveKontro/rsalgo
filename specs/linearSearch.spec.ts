@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { linearSearch } from '../src/algorithms/search/linearSearch'
+import { linearSearch } from '../src/node/search/linearSearch'
 
 describe('linearSearch', () => {
   it('indexes are found', () => {

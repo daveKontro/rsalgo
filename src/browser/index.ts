@@ -1,5 +1,11 @@
-export type { FibonacciSequence } from './math/types'
-export type { LinearSearchOptions } from './search/types'
+export type {
+  Result,
+  ResultArray,
+  FibonacciSequence,
+  SearchArray,
+  SearchTarget,
+  LinearSearchOptions,
+} from '../types'
 
 export { sum } from './math/sum'
 export { fibonacciNth, fibonacci } from './math/fibonacci'
