@@ -33,6 +33,19 @@ function passArray32ToWasm0(arg, malloc) {
 let WASM_VECTOR_LEN = 0;
 
 /**
+ * @param {Int32Array} arr
+ * @param {number} target
+ * @returns {number}
+ */
+function binary_search(arr, target) {
+    const ptr0 = passArray32ToWasm0(arr, wasm.__wbindgen_malloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.binary_search(ptr0, len0, target);
+    return ret;
+}
+exports.binary_search = binary_search;
+
+/**
  * @param {number} n
  * @returns {Int32Array}
  */

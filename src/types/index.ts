@@ -8,4 +8,5 @@ export type {
 
 export type {
   LinearSearchOptions,
+  BinarySearchOptions,
 } from './interfaces'

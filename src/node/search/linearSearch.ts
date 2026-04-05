@@ -1,6 +1,10 @@
-import { linear_search as linear_search_rs } from '../../generated/node/algorithms.js'
-import type { ResultArray } from '../../types/types.js'
-import type { LinearSearchOptions } from '../../types/interfaces.js'
+import {
+  linear_search as linear_search_rs,
+} from '../../generated/node/algorithms.js'
+import type {
+  ResultArray,
+  LinearSearchOptions,
+} from '../../types'
 
 export const linearSearch = ({
   arr,

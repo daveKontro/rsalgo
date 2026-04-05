@@ -10,6 +10,10 @@ interface LinearSearchOptions {
   arr: SearchArray;
   target: SearchTarget;
 }
+interface BinarySearchOptions {
+  arr: SearchArray;
+  target: SearchTarget;
+}
 //#endregion
 //#region src/node/math/sum.d.ts
 declare const sum: (left: number, right: number) => Result;
@@ -27,5 +31,11 @@ declare const linearSearch: ({
   target
 }: LinearSearchOptions) => ResultArray;
 //#endregion
-export { type FibonacciSequence, type LinearSearchOptions, type Result, type ResultArray, type SearchArray, type SearchTarget, fibonacci, fibonacciNth, isPrime, linearSearch, sum };
+//#region src/node/search/binarySearch.d.ts
+declare const binarySearch: ({
+  arr,
+  target
+}: BinarySearchOptions) => Result;
+//#endregion
+export { type BinarySearchOptions, type FibonacciSequence, type LinearSearchOptions, type Result, type ResultArray, type SearchArray, type SearchTarget, binarySearch, fibonacci, fibonacciNth, isPrime, linearSearch, sum };
 //# sourceMappingURL=index.d.cts.map

@@ -4,3 +4,8 @@ export interface LinearSearchOptions {
   arr: types.SearchArray,
   target: types.SearchTarget,
 }
+
+export interface BinarySearchOptions {
+  arr: types.SearchArray,
+  target: types.SearchTarget,
+}

@@ -5,7 +5,7 @@ import {
 import type {
   Result,
   FibonacciSequence,
-} from '../../types/types.js'
+} from '../../types'
 
 export const fibonacciNth = (n: number): Result => {
   return fibonacci_nth_rs(n)

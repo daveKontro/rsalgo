@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export const memory: WebAssembly.Memory;
+export const binary_search: (a: number, b: number, c: number) => number;
 export const fibonacci: (a: number) => [number, number];
 export const fibonacci_nth: (a: number) => number;
 export const is_prime: (a: number) => number;

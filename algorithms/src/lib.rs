@@ -79,6 +79,28 @@ pub fn linear_search(arr: Vec<i32>, target: i32) -> Vec<i32> {
     indices
 }
 
+#[wasm_bindgen]
+pub fn binary_search(arr: Vec<i32>, target: i32) -> i32 {
+    let mut left_index: usize = 0;
+    let mut right_index: usize = arr.len() - 1;
+
+    let mut index: i32 = -1;
+
+    while left_index <= right_index && index == -1 {
+        let middle_index = (left_index + right_index) / 2;
+
+        if target == arr[middle_index] {
+            index = middle_index as i32;
+        } else if target < arr[middle_index] {
+            right_index = middle_index - 1;
+        } else {
+            left_index = middle_index + 1;
+        }
+    }
+
+    index
+}
+
 
 #[cfg(test)]
 mod tests {
@@ -127,5 +149,18 @@ mod tests {
         let expected_result_indices: Vec<i32> = vec![2, 4];
 
         assert_eq!(result, expected_result_indices);
+    }
+
+    #[test]
+    fn binary_search_works() {
+        let arr: Vec<i32> = vec![-5, 2, 4, 6, 10];
+
+        let result_target_ten = binary_search(arr.clone(), 10);
+        let result_target_six = binary_search(arr.clone(), 6);
+        let result_target_eleven = binary_search(arr.clone(), 11);
+
+        assert_eq!(result_target_ten, 4);
+        assert_eq!(result_target_six, 3);
+        assert_eq!(result_target_eleven, -1);
     }
 }
