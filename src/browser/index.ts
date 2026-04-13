@@ -5,6 +5,7 @@ export type {
   SearchArray,
   SearchTarget,
   LinearSearchOptions,
+  BinarySearchOptions,
 } from '../types'
 
 export { sum } from './math/sum'

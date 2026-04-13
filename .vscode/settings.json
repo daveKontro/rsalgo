@@ -1,5 +1,6 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
+  "chat.fontSize": 18,
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#0d1247",
     "activityBar.background": "#0d1247",

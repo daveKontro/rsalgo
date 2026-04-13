@@ -1,5 +1,6 @@
 notes/
 .artifacts/
+.vscode/
 
 # Logs
 logs

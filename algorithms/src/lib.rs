@@ -2,6 +2,8 @@ mod utils;
 
 use wasm_bindgen::prelude::*;
 
+// math
+
 #[wasm_bindgen]
 pub fn sum(left: i32, right: i32) -> i32 {
     left + right
@@ -66,6 +68,8 @@ pub fn is_prime(n: i32) -> bool {
     }
 }
 
+// search
+
 #[wasm_bindgen]
 pub fn linear_search(arr: Vec<i32>, target: i32) -> Vec<i32> {
     let mut indices = Vec::new();
@@ -101,6 +105,33 @@ pub fn binary_search(arr: Vec<i32>, target: i32) -> i32 {
     index
 }
 
+// sort
+
+pub fn merge_sort(arr: Vec<i32>) -> Vec<i32> {
+    fn merge(mut left: Vec<i32>, mut right: Vec<i32>) -> Vec<i32> {
+        let mut sorted = Vec::new();
+
+        while !left.is_empty() && !right.is_empty() {
+            if left[0] <= right[0] {
+                sorted.push(left.remove(0));
+            } else {
+                sorted.push(right.remove(0));
+            }
+        }
+
+        [sorted, left, right].concat()
+    }
+
+    if arr.len() < 2 {
+        arr
+    } else {
+        let mid = arr.len() / 2;
+        let left = arr[..mid].to_vec();
+        let right = arr[mid..].to_vec();
+
+        merge(merge_sort(left), merge_sort(right))
+    }
+}
 
 #[cfg(test)]
 mod tests {
@@ -162,5 +193,16 @@ mod tests {
         assert_eq!(result_target_ten, 4);
         assert_eq!(result_target_six, 3);
         assert_eq!(result_target_eleven, -1);
+    }
+
+    #[test]
+    fn merge_sort_works() {
+        let arr: Vec<i32> = vec![8, 20, -2, 4, -6];
+
+        let result = merge_sort(arr);
+
+        let expected_result: Vec<i32> = vec![-6, -2, 4, 8, 20];
+
+        assert_eq!(result, expected_result);
     }
 }
