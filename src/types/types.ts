@@ -5,3 +5,5 @@ export type FibonacciSequence = Int32Array<ArrayBufferLike>
 
 export type SearchArray = number[]
 export type SearchTarget = number
+
+export type SortArray = number[]

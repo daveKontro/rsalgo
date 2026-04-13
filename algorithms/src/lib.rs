@@ -107,6 +107,7 @@ pub fn binary_search(arr: Vec<i32>, target: i32) -> i32 {
 
 // sort
 
+#[wasm_bindgen]
 pub fn merge_sort(arr: Vec<i32>) -> Vec<i32> {
     fn merge(mut left: Vec<i32>, mut right: Vec<i32>) -> Vec<i32> {
         let mut sorted = Vec::new();

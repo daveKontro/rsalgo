@@ -4,6 +4,7 @@ type ResultArray = Int32Array<ArrayBufferLike>;
 type FibonacciSequence = Int32Array<ArrayBufferLike>;
 type SearchArray = number[];
 type SearchTarget = number;
+type SortArray = number[];
 //#endregion
 //#region src/types/interfaces.d.ts
 interface LinearSearchOptions {
@@ -13,6 +14,9 @@ interface LinearSearchOptions {
 interface BinarySearchOptions {
   arr: SearchArray;
   target: SearchTarget;
+}
+interface MergeSortOptions {
+  arr: SortArray;
 }
 //#endregion
 //#region src/node/math/sum.d.ts
@@ -37,5 +41,10 @@ declare const binarySearch: ({
   target
 }: BinarySearchOptions) => Result;
 //#endregion
-export { type BinarySearchOptions, type FibonacciSequence, type LinearSearchOptions, type Result, type ResultArray, type SearchArray, type SearchTarget, binarySearch, fibonacci, fibonacciNth, isPrime, linearSearch, sum };
+//#region src/node/sort/mergeSort.d.ts
+declare const mergeSort: ({
+  arr
+}: MergeSortOptions) => ResultArray;
+//#endregion
+export { type BinarySearchOptions, type FibonacciSequence, type LinearSearchOptions, type MergeSortOptions, type Result, type ResultArray, type SearchArray, type SearchTarget, type SortArray, binarySearch, fibonacci, fibonacciNth, isPrime, linearSearch, mergeSort, sum };
 //# sourceMappingURL=index.d.cts.map

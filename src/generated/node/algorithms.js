@@ -93,6 +93,20 @@ function linear_search(arr, target) {
 exports.linear_search = linear_search;
 
 /**
+ * @param {Int32Array} arr
+ * @returns {Int32Array}
+ */
+function merge_sort(arr) {
+    const ptr0 = passArray32ToWasm0(arr, wasm.__wbindgen_malloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.merge_sort(ptr0, len0);
+    var v2 = getArrayI32FromWasm0(ret[0], ret[1]).slice();
+    wasm.__wbindgen_free(ret[0], ret[1] * 4, 4);
+    return v2;
+}
+exports.merge_sort = merge_sort;
+
+/**
  * @param {number} left
  * @param {number} right
  * @returns {number}

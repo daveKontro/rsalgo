@@ -9,3 +9,7 @@ export interface BinarySearchOptions {
   arr: types.SearchArray,
   target: types.SearchTarget,
 }
+
+export interface MergeSortOptions {
+  arr: types.SortArray,
+}
