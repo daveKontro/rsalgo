@@ -46,6 +46,19 @@ export function binary_search(arr, target) {
 }
 
 /**
+ * @param {Int32Array} arr
+ * @returns {Int32Array}
+ */
+export function bubble_sort(arr) {
+    const ptr0 = passArray32ToWasm0(arr, wasm.__wbindgen_malloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.bubble_sort(ptr0, len0);
+    var v2 = getArrayI32FromWasm0(ret[0], ret[1]).slice();
+    wasm.__wbindgen_free(ret[0], ret[1] * 4, 4);
+    return v2;
+}
+
+/**
  * @param {number} n
  * @returns {Int32Array}
  */

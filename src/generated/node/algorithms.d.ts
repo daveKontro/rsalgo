@@ -3,6 +3,8 @@
 
 export function binary_search(arr: Int32Array, target: number): number;
 
+export function bubble_sort(arr: Int32Array): Int32Array;
+
 export function fibonacci(n: number): Int32Array;
 
 export function fibonacci_nth(n: number): number;

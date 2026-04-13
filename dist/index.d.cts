@@ -15,6 +15,9 @@ interface BinarySearchOptions {
   arr: SearchArray;
   target: SearchTarget;
 }
+interface BubbleSortOptions {
+  arr: SortArray;
+}
 interface MergeSortOptions {
   arr: SortArray;
 }
@@ -41,10 +44,15 @@ declare const binarySearch: ({
   target
 }: BinarySearchOptions) => Result;
 //#endregion
+//#region src/node/sort/bubbleSort.d.ts
+declare const bubbleSort: ({
+  arr
+}: BubbleSortOptions) => ResultArray;
+//#endregion
 //#region src/node/sort/mergeSort.d.ts
 declare const mergeSort: ({
   arr
 }: MergeSortOptions) => ResultArray;
 //#endregion
-export { type BinarySearchOptions, type FibonacciSequence, type LinearSearchOptions, type MergeSortOptions, type Result, type ResultArray, type SearchArray, type SearchTarget, type SortArray, binarySearch, fibonacci, fibonacciNth, isPrime, linearSearch, mergeSort, sum };
+export { type BinarySearchOptions, type BubbleSortOptions, type FibonacciSequence, type LinearSearchOptions, type MergeSortOptions, type Result, type ResultArray, type SearchArray, type SearchTarget, type SortArray, binarySearch, bubbleSort, fibonacci, fibonacciNth, isPrime, linearSearch, mergeSort, sum };
 //# sourceMappingURL=index.d.cts.map
