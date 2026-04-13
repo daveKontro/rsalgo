@@ -10,5 +10,6 @@ export type {
 export type {
   LinearSearchOptions,
   BinarySearchOptions,
+  BubbleSortOptions,
   MergeSortOptions,
 } from './interfaces'

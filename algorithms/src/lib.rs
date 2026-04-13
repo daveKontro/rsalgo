@@ -108,6 +108,21 @@ pub fn binary_search(arr: Vec<i32>, target: i32) -> i32 {
 // sort
 
 #[wasm_bindgen]
+pub fn bubble_sort(arr: Vec<i32>) -> Vec<i32> {
+    let mut arr = arr;
+
+    for i in 0..arr.len() {
+        for j in 0..arr.len() - 1 - i {
+            if arr[j] > arr[j + 1] {
+                arr.swap(j, j + 1);
+            }
+        }
+    }
+
+    arr
+}
+
+#[wasm_bindgen]
 pub fn merge_sort(arr: Vec<i32>) -> Vec<i32> {
     fn merge(mut left: Vec<i32>, mut right: Vec<i32>) -> Vec<i32> {
         let mut sorted = Vec::new();
@@ -194,6 +209,17 @@ mod tests {
         assert_eq!(result_target_ten, 4);
         assert_eq!(result_target_six, 3);
         assert_eq!(result_target_eleven, -1);
+    }
+
+    #[test]
+    fn bubble_sort_works() {
+        let arr: Vec<i32> = vec![8, 11, -1, 5, -9];
+
+        let result = bubble_sort(arr);
+
+        let expected_result: Vec<i32> = vec![-9, -1, 5, 8, 11];
+
+        assert_eq!(result, expected_result);
     }
 
     #[test]

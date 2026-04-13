@@ -10,6 +10,10 @@ export interface BinarySearchOptions {
   target: types.SearchTarget,
 }
 
+export interface BubbleSortOptions {
+  arr: types.SortArray,
+}
+
 export interface MergeSortOptions {
   arr: types.SortArray,
 }
