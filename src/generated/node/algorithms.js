@@ -82,6 +82,20 @@ function fibonacci_nth(n) {
 exports.fibonacci_nth = fibonacci_nth;
 
 /**
+ * @param {Int32Array} arr
+ * @returns {Int32Array}
+ */
+function insertion_sort(arr) {
+    const ptr0 = passArray32ToWasm0(arr, wasm.__wbindgen_malloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.insertion_sort(ptr0, len0);
+    var v2 = getArrayI32FromWasm0(ret[0], ret[1]).slice();
+    wasm.__wbindgen_free(ret[0], ret[1] * 4, 4);
+    return v2;
+}
+exports.insertion_sort = insertion_sort;
+
+/**
  * @param {number} n
  * @returns {boolean}
  */
@@ -119,6 +133,20 @@ function merge_sort(arr) {
     return v2;
 }
 exports.merge_sort = merge_sort;
+
+/**
+ * @param {Int32Array} arr
+ * @returns {Int32Array}
+ */
+function quick_sort(arr) {
+    const ptr0 = passArray32ToWasm0(arr, wasm.__wbindgen_malloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.quick_sort(ptr0, len0);
+    var v2 = getArrayI32FromWasm0(ret[0], ret[1]).slice();
+    wasm.__wbindgen_free(ret[0], ret[1] * 4, 4);
+    return v2;
+}
+exports.quick_sort = quick_sort;
 
 /**
  * @param {number} left

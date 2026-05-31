@@ -17,3 +17,11 @@ export interface BubbleSortOptions {
 export interface MergeSortOptions {
   arr: types.SortArray,
 }
+
+export interface InsertionSortOptions {
+  arr: types.SortArray,
+}
+
+export interface QuickSortOptions {
+  arr: types.SortArray,
+}

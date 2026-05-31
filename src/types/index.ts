@@ -11,5 +11,7 @@ export type {
   LinearSearchOptions,
   BinarySearchOptions,
   BubbleSortOptions,
+  InsertionSortOptions,
   MergeSortOptions,
+  QuickSortOptions,
 } from './interfaces'

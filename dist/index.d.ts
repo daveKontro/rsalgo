@@ -21,6 +21,12 @@ interface BubbleSortOptions {
 interface MergeSortOptions {
   arr: SortArray;
 }
+interface InsertionSortOptions {
+  arr: SortArray;
+}
+interface QuickSortOptions {
+  arr: SortArray;
+}
 //#endregion
 //#region src/node/math/sum.d.ts
 declare const sum: (left: number, right: number) => Result;
@@ -49,10 +55,20 @@ declare const bubbleSort: ({
   arr
 }: BubbleSortOptions) => ResultArray;
 //#endregion
+//#region src/node/sort/insertionSort.d.ts
+declare const insertionSort: ({
+  arr
+}: InsertionSortOptions) => ResultArray;
+//#endregion
 //#region src/node/sort/mergeSort.d.ts
 declare const mergeSort: ({
   arr
 }: MergeSortOptions) => ResultArray;
 //#endregion
-export { type BinarySearchOptions, type BubbleSortOptions, type FibonacciSequence, type LinearSearchOptions, type MergeSortOptions, type Result, type ResultArray, type SearchArray, type SearchTarget, type SortArray, binarySearch, bubbleSort, fibonacci, fibonacciNth, isPrime, linearSearch, mergeSort, sum };
+//#region src/node/sort/quickSort.d.ts
+declare const quickSort: ({
+  arr
+}: QuickSortOptions) => ResultArray;
+//#endregion
+export { type BinarySearchOptions, type BubbleSortOptions, type FibonacciSequence, type InsertionSortOptions, type LinearSearchOptions, type MergeSortOptions, type QuickSortOptions, type Result, type ResultArray, type SearchArray, type SearchTarget, type SortArray, binarySearch, bubbleSort, fibonacci, fibonacciNth, insertionSort, isPrime, linearSearch, mergeSort, quickSort, sum };
 //# sourceMappingURL=index.d.ts.map

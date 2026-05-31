@@ -123,6 +123,50 @@ pub fn bubble_sort(arr: Vec<i32>) -> Vec<i32> {
 }
 
 #[wasm_bindgen]
+pub fn insertion_sort(arr: Vec<i32>) -> Vec<i32> {
+    if arr.len() < 2 {
+        arr
+    } else {
+        let mut arr = arr;
+
+        for i in 1..arr.len() {
+            let mut j = i;
+
+            while j > 0 && arr[j] < arr[j - 1] {
+                arr.swap(j, j - 1);
+                j -= 1;
+            }
+        }
+
+        arr
+    }
+}
+
+#[wasm_bindgen]
+pub fn quick_sort(arr: Vec<i32>) -> Vec<i32> {
+    if arr.len() < 2 {
+        arr
+    } else {
+        let pivot = arr[arr.len() / 2];
+        let mut left = Vec::new();
+        let mut middle = Vec::new();
+        let mut right = Vec::new();
+
+        for &x in arr.iter() {
+            if x < pivot {
+                left.push(x);
+            } else if x == pivot {
+                middle.push(x);
+            } else {
+                right.push(x);
+            }
+        }
+
+        [quick_sort(left), middle, quick_sort(right)].concat()
+    }
+}
+
+#[wasm_bindgen]
 pub fn merge_sort(arr: Vec<i32>) -> Vec<i32> {
     fn merge(mut left: Vec<i32>, mut right: Vec<i32>) -> Vec<i32> {
         let mut sorted = Vec::new();
@@ -218,6 +262,28 @@ mod tests {
         let result = bubble_sort(arr);
 
         let expected_result: Vec<i32> = vec![-9, -1, 5, 8, 11];
+
+        assert_eq!(result, expected_result);
+    }
+
+    #[test]
+    fn insertion_sort_works() {
+        let arr: Vec<i32> = vec![8, 20, -2, 4, -6];
+
+        let result = insertion_sort(arr);
+
+        let expected_result: Vec<i32> = vec![-6, -2, 4, 8, 20];
+
+        assert_eq!(result, expected_result);
+    }
+
+    #[test]
+    fn quick_sort_works() {
+        let arr: Vec<i32> = vec![8, 20, -2, 4, -6];
+
+        let result = quick_sort(arr);
+
+        let expected_result: Vec<i32> = vec![-6, -2, 4, 8, 20];
 
         assert_eq!(result, expected_result);
     }
