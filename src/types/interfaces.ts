@@ -25,3 +25,18 @@ export interface InsertionSortOptions {
 export interface QuickSortOptions {
   arr: types.SortArray,
 }
+
+export interface BFSOptions {
+  graph: types.Graph,
+  start: types.GraphNode,
+  onVisit?: (node: types.GraphNode) => void,
+  onEnqueue?: (node: types.GraphNode) => void,
+  onComplete?: (order: types.GraphNode[]) => void,
+}
+
+export interface DFSOptions {
+  graph: types.Graph,
+  start: types.GraphNode,
+  onEnter?: (node: types.GraphNode) => void,
+  onExit?: (node: types.GraphNode) => void,
+}

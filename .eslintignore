@@ -7,5 +7,6 @@ dist
 notes
 scripts
 artifacts
+benchmarks
 tsconfig.json
 tsdown.config.ts

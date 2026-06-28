@@ -5,6 +5,8 @@ export type {
   SearchArray,
   SearchTarget,
   SortArray,
+  Graph,
+  GraphNode,
 } from './types'
 
 export type {
@@ -14,4 +16,6 @@ export type {
   InsertionSortOptions,
   MergeSortOptions,
   QuickSortOptions,
+  BFSOptions,
+  DFSOptions,
 } from './interfaces'

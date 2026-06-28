@@ -5,6 +5,8 @@ type FibonacciSequence = Int32Array<ArrayBufferLike>;
 type SearchArray = number[];
 type SearchTarget = number;
 type SortArray = number[];
+type Graph = Record<string, string[]>;
+type GraphNode = string;
 //#endregion
 //#region src/types/interfaces.d.ts
 interface LinearSearchOptions {
@@ -27,9 +29,19 @@ interface InsertionSortOptions {
 interface QuickSortOptions {
   arr: SortArray;
 }
-//#endregion
-//#region src/node/math/sum.d.ts
-declare const sum: (left: number, right: number) => Result;
+interface BFSOptions {
+  graph: Graph;
+  start: GraphNode;
+  onVisit?: (node: GraphNode) => void;
+  onEnqueue?: (node: GraphNode) => void;
+  onComplete?: (order: GraphNode[]) => void;
+}
+interface DFSOptions {
+  graph: Graph;
+  start: GraphNode;
+  onEnter?: (node: GraphNode) => void;
+  onExit?: (node: GraphNode) => void;
+}
 //#endregion
 //#region src/node/math/fibonacci.d.ts
 declare const fibonacciNth: (n: number) => Result;
@@ -70,5 +82,22 @@ declare const quickSort: ({
   arr
 }: QuickSortOptions) => ResultArray;
 //#endregion
-export { type BinarySearchOptions, type BubbleSortOptions, type FibonacciSequence, type InsertionSortOptions, type LinearSearchOptions, type MergeSortOptions, type QuickSortOptions, type Result, type ResultArray, type SearchArray, type SearchTarget, type SortArray, binarySearch, bubbleSort, fibonacci, fibonacciNth, insertionSort, isPrime, linearSearch, mergeSort, quickSort, sum };
+//#region src/node/graph/breadthFirstSearch.d.ts
+declare const breadthFirstSearch: ({
+  graph,
+  start,
+  onVisit,
+  onEnqueue,
+  onComplete
+}: BFSOptions) => void;
+//#endregion
+//#region src/node/graph/depthFirstSearch.d.ts
+declare const depthFirstSearch: ({
+  graph,
+  start,
+  onEnter,
+  onExit
+}: DFSOptions) => void;
+//#endregion
+export { type BFSOptions, type BinarySearchOptions, type BubbleSortOptions, type DFSOptions, type FibonacciSequence, type Graph, type GraphNode, type InsertionSortOptions, type LinearSearchOptions, type MergeSortOptions, type QuickSortOptions, type Result, type ResultArray, type SearchArray, type SearchTarget, type SortArray, binarySearch, breadthFirstSearch, bubbleSort, depthFirstSearch, fibonacci, fibonacciNth, insertionSort, isPrime, linearSearch, mergeSort, quickSort };
 //# sourceMappingURL=index.d.ts.map

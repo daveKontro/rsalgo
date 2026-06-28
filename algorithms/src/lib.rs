@@ -1,13 +1,11 @@
 mod utils;
 
 use wasm_bindgen::prelude::*;
+use std::collections::HashMap;
+use std::collections::VecDeque;
+use std::collections::HashSet;
 
 // math
-
-#[wasm_bindgen]
-pub fn sum(left: i32, right: i32) -> i32 {
-    left + right
-}
 
 #[wasm_bindgen]
 pub fn fibonacci_nth(n: i32) -> i32 {
@@ -193,15 +191,219 @@ pub fn merge_sort(arr: Vec<i32>) -> Vec<i32> {
     }
 }
 
+// graph
+
+type Graph = HashMap<String, Vec<String>>;
+
+struct BfsCallbacks<FVisit, FEnqueue, FComplete>
+where
+    FVisit: FnMut(&str),
+    FEnqueue: FnMut(&str),
+    FComplete: FnMut(&[String]),
+{
+    on_visit: Option<FVisit>,
+    on_enqueue: Option<FEnqueue>,
+    on_complete: Option<FComplete>,
+}
+
+fn bfs<FVisit, FEnqueue, FComplete>(
+    graph: &Graph,
+    start: &str,
+    callbacks: &mut BfsCallbacks<FVisit, FEnqueue, FComplete>,
+)
+where
+    FVisit: FnMut(&str),
+    FEnqueue: FnMut(&str),
+    FComplete: FnMut(&[String]),
+{
+    let mut visited: HashSet<String> = HashSet::new();  // fast O(1) lookup
+    let mut queue: VecDeque<String> = VecDeque::new();  // has push_back/pop_front
+    let mut order: Vec<String> = Vec::new();  // just an ordered list
+
+    visited.insert(start.to_string());
+    queue.push_back(start.to_string());
+
+        while let Some(node) = queue.pop_front() {
+        order.push(node.clone());
+
+        if let Some(f) = &mut callbacks.on_visit {
+            f(&node);
+        }
+
+        for neighbor in &graph[&node] {
+            if !visited.contains(neighbor) {
+                visited.insert(neighbor.clone());
+                queue.push_back(neighbor.clone());
+
+                if let Some(f) = &mut callbacks.on_enqueue {
+                    f(neighbor);
+                }
+            }
+        }
+    }
+
+    if let Some(f) = &mut callbacks.on_complete {
+        f(&order);
+    }
+}
+
+// public wasm wrapper for bfs - no generics
+#[wasm_bindgen]
+pub fn breadth_first_search(
+    graph: JsValue,
+    start: &str,
+    on_visit: Option<js_sys::Function>,
+    on_enqueue: Option<js_sys::Function>,
+    on_complete: Option<js_sys::Function>,
+) {
+    let graph: Graph = serde_wasm_bindgen::from_value(graph).unwrap(); // convert here
+
+    let mut callbacks = BfsCallbacks {
+        on_visit: on_visit.map(|f| move |node: &str| {
+            f.call1(&JsValue::NULL, &JsValue::from_str(node)).unwrap();
+        }),
+        on_enqueue: on_enqueue.map(|f| move |node: &str| {
+            f.call1(&JsValue::NULL, &JsValue::from_str(node)).unwrap();
+        }),
+        on_complete: on_complete.map(|f| move |order: &[String]| {
+            let js_array = order.iter()
+                .map(|s| JsValue::from_str(s))
+                .collect::<js_sys::Array>();
+            f.call1(&JsValue::NULL, &js_array).unwrap();
+        }),
+    };
+
+    bfs(&graph, start, &mut callbacks);  // pass as &Graph
+}
+
+struct DfsCallbacks<FEnter, FExit>
+where
+    FEnter: FnMut(&str),
+    FExit: FnMut(&str),
+{
+    on_enter: Option<FEnter>,
+    on_exit: Option<FExit>,
+}
+
+fn dfs<FEnter, FExit>(
+    graph: &Graph,
+    start: &str,
+    callbacks: &mut DfsCallbacks<FEnter, FExit>,
+    visited: &mut HashSet<String>,
+)
+where
+    FEnter: FnMut(&str),
+    FExit: FnMut(&str),
+{
+    visited.insert(start.to_string());
+
+    if let Some(f) = &mut callbacks.on_enter {
+        f(start);
+    }
+
+    for neighbor in &graph[start] {
+        if !visited.contains(neighbor) {
+            dfs(graph, neighbor, callbacks, visited);
+        }
+    }
+
+    if let Some(f) = &mut callbacks.on_exit {
+        f(start);
+    }
+}
+
+// public wasm wrapper for dfs - no generics
+#[wasm_bindgen]
+pub fn depth_first_search(
+    graph: JsValue,
+    start: &str,
+    on_enter: Option<js_sys::Function>,
+    on_exit: Option<js_sys::Function>,
+) {
+    let graph: Graph = serde_wasm_bindgen::from_value(graph).unwrap(); // convert here
+
+    let mut callbacks = DfsCallbacks {
+        on_enter: on_enter.map(|f| move |node: &str| {
+            f.call1(&JsValue::NULL, &JsValue::from_str(node)).unwrap();
+        }),
+        on_exit: on_exit.map(|f| move |node: &str| {
+            f.call1(&JsValue::NULL, &JsValue::from_str(node)).unwrap();
+        }),
+    };
+
+    let mut visited = HashSet::new();
+
+    dfs(&graph, start, &mut callbacks, &mut visited);   // pass as &Graph
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::collections::HashSet;
+
+    fn make_graph() -> Graph {
+        HashMap::from([
+            ("A".to_string(), vec!["B".to_string(), "C".to_string()]),
+            ("B".to_string(), vec!["A".to_string(), "D".to_string(), "E".to_string()]),
+            ("C".to_string(), vec!["A".to_string(), "E".to_string()]),
+            ("D".to_string(), vec!["B".to_string(), "F".to_string()]),
+            ("E".to_string(), vec!["B".to_string(), "C".to_string(), "F".to_string()]),
+            ("F".to_string(), vec!["D".to_string(), "E".to_string(), "G".to_string()]),
+            ("G".to_string(), vec!["F".to_string()]),
+        ])
+    }
 
     #[test]
-    fn sum_works() {
-        let result = sum(2, 2);
+    fn bfs_works() {
+        let graph = make_graph();
+        let mut result: Vec<String> = Vec::new();
 
-        assert_eq!(result, 4);
+        {
+            let mut callbacks = BfsCallbacks {
+                on_visit: None::<fn(&str)>,
+                on_enqueue: None::<fn(&str)>,
+                on_complete: Some(|order: &[String]| {
+                    result = order.to_vec();
+                }),
+            };
+
+            bfs(&graph, "A", &mut callbacks);
+        }
+
+        let expected: Vec<String> = vec!["A", "B", "C", "D", "E", "F", "G"]
+            .iter().map(|s| s.to_string()).collect();
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn dfs_works() {
+        let graph = make_graph();
+        let mut enter_order: Vec<String> = Vec::new();
+        let mut exit_order: Vec<String> = Vec::new();
+
+        {
+            let mut callbacks = DfsCallbacks {
+                on_enter: Some(|node: &str| {
+                    enter_order.push(node.to_string());
+                }),
+                on_exit: Some(|node: &str| {
+                    exit_order.push(node.to_string());
+                }),
+            };
+
+            let mut visited = HashSet::new();
+            dfs(&graph, "A", &mut callbacks, &mut visited);
+        }
+
+        let expected_enter: Vec<String> = vec!["A", "B", "D", "F", "E", "C", "G"]
+            .iter().map(|s| s.to_string()).collect();
+
+        let expected_exit: Vec<String> = vec!["C", "E", "G", "F", "D", "B", "A"]
+            .iter().map(|s| s.to_string()).collect();
+
+        assert_eq!(enter_order, expected_enter);
+        assert_eq!(exit_order, expected_exit);
     }
 
     #[test]

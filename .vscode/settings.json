@@ -22,6 +22,9 @@
   },
   "peacock.color": "#05071c",
   "cSpell.words": [
-    "rsalgo"
+    "bindgen",
+    "Deque",
+    "rsalgo",
+    "serde"
   ]
 }
