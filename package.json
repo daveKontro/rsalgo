@@ -67,6 +67,10 @@
   ],
   "author": "David Kontrovitz",
   "license": "MIT",
+  "engines": {
+    "node": ">=20",
+    "npm": ">=10"
+  },
   "overrides": {
     "serialize-javascript": "7.0.3"
   },
