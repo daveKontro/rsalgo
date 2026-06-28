@@ -1,0 +1,12 @@
+.eslintrc.cjs
+node_modules
+.vscode
+.husky
+specs
+dist
+notes
+scripts
+artifacts
+benchmarks
+tsconfig.json
+tsdown.config.ts
