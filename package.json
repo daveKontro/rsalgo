@@ -1,6 +1,6 @@
 {
   "name": "rsalgo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "fast running algorithms for .js/.ts written in rust",
   "type": "module",
   "main": "./dist/index.cjs",
