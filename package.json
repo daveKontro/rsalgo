@@ -44,9 +44,12 @@
     "test:js:watch:min": "tsx node_modules/mocha/bin/mocha specs/**/*.ts --watch --watch-files src/**/*.ts,specs/**/*.ts --reporter min",
     "bench": "tsx benchmarks/index.ts",
     "lint": "eslint src --ext .ts",
-    "prepare": "husky",
     "dev:rust": "npm run build:wasm:node && npm run build:wasm:browser && concurrently -k \"npm run watch:rust\" \"npm run test:rust:watch\"",
-    "dev": "npm run build:wasm:node && npm run build:wasm:browser && npm run build:js && concurrently -k \"npm run watch:rust\" \"npm run test:rust:watch\" \"npm run watch:js\" \"npm run watch:pack:dev\" \"npm run test:js:watch:min\""
+    "dev": "npm run build:wasm:node && npm run build:wasm:browser && npm run build:js && concurrently -k \"npm run watch:rust\" \"npm run test:rust:watch\" \"npm run watch:js\" \"npm run watch:pack:dev\" \"npm run test:js:watch:min\"",
+    "release:patch": "npm version patch && npm run build",
+    "release:minor": "npm version minor && npm run build",
+    "release:major": "npm version major && npm run build",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
