@@ -1,5 +1,5 @@
 {
-  "name": "rsalgo",
+  "name": "@epic-effx/rsalgo",
   "version": "0.2.0",
   "description": "fast running algorithms for .js/.ts written in rust",
   "type": "module",
