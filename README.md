@@ -16,7 +16,7 @@ supports Node.js and browser environments
 
 ## installation
 ```
-npm install rsalgo
+npm install @epic-effx/rsalgo
 ```
 
 ## node.js usage
