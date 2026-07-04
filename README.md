@@ -5,7 +5,7 @@
 # rsalgo
 
 <div style="margin-top:20px;">
-  <img src="./assets/logo.svg" width="120" height="120" alt="logo" />
+  <img src="./assets/rsalgo.png" width="120" height="120" alt="logo" />
 </div>
 
 algorithms for .js / .ts written in rust 🦀  
